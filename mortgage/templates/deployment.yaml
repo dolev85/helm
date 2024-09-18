@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service.name }}-deployment
+  labels:
+    app: {{ .Values.service.name }} 
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.service.name }}  
+      role: {{ .Values.service.role }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.name }}  
+        role: {{ .Values.service.role }}
+    spec:
+      containers:
+        - name: {{ .Values.service.name }}  
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-config
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.service.contextPath }}/actuator/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.service.contextPath }}/actuator/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ .Release.Name }}-config
+      volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
