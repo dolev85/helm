@@ -43,7 +43,9 @@ service:
   contextPath: "/default-service-name"
   type: ClusterIP
   port: 8080
+  targetPort: 8080  # You can change this if needed
   role: "dev"
+
 
 namespace: "default"
 
