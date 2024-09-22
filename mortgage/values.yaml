@@ -39,10 +39,12 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: "{{ image.repository | splitList \"/\" | last }}"
+  name: "default-service"
+  contextPath: "/default-service"
   type: ClusterIP
   port: 8080
   role: "dev"
+
 
 ingress:
   enabled: false
