@@ -9,7 +9,3 @@ data:
   {{- range $key, $value := .Values.configVars }}
   {{ $key }}: {{ $value | quote }}
   {{- end }}
-  MANAGEMENT_ENDPOINT_HEALTH_INDICATORS_REDIS_VITALITYREPORT: "false"
-  MONGO_DB_NAME: "ltv-lab"
-  PORT: '8080'
-  MONGO_CONNECTION_STRING: "mongodb+srv://mortgages:mortgages123@mortgages-pl-0.38k3e.mongodb.net/ltv-ghost?authSource=admin"
