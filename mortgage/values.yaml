@@ -5,9 +5,9 @@
 replicaCount: 1
 
 image:
-  repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/default-repo"
-  tag: "latest"
-  pullPolicy: Always
+  repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/{{ .Values.nameOverride | default .Chart.Name }}"
+  tag: "{{ image.tag }}"
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,15 +39,11 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: "default-service-name"
-  contextPath: "/default-service-name"
+  name: "{{ image.repository | splitList \"/\" | last }}"
+  contextPath: "/{{ image.repository | splitList \"/\" | last }}"
   type: ClusterIP
   port: 8080
-  targetPort: 8080  # You can change this if needed
   role: "dev"
-
-
-namespace: "default"
 
 ingress:
   enabled: false
