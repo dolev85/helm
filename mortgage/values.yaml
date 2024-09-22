@@ -40,7 +40,6 @@ securityContext: {}
 
 service:
   name: "{{ image.repository | splitList \"/\" | last }}"
-  contextPath: "/{{ image.repository | splitList \"/\" | last }}"
   type: ClusterIP
   port: 8080
   role: "dev"
