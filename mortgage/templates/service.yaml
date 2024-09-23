@@ -6,7 +6,6 @@ metadata:
     app: {{ .Values.nameOverride | default .Chart.Name }}
 spec:
   type: {{ .Values.service.type }}
-  contextPath: {{ .Values.service.contextPath }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort | default .Values.service.port }}
