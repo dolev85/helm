@@ -41,6 +41,3 @@ spec:
         - name: config-volume
           configMap:
             name: {{ .Release.Name }}-config
-      volumeMounts:
-        - name: config-volume
-          mountPath: /app/config
