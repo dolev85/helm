@@ -41,11 +41,10 @@ securityContext: {}
 service:
   # These values will be dynamically set by Argo CD Image Updater
   name: "{{ .Values.service.name }}"
-  contextPath: "{{ .Values.service.contextPath }}"
-  namespace: "{{ .Values.service.namespace }}"
   type: ClusterIP
   port: 8080
   role: "dev"
+  contextPath: "{{ .Values.service.contextPath }}"
 
 ingress:
   enabled: false

@@ -68,7 +68,7 @@ spec:
             - containerPort: 8080
           envFrom:
             - configMapRef:
-                name: mortgage-config
+                name: leumi-ltv-service-config
           livenessProbe:
             httpGet:
               path: /leumi-ltv-service/actuator/health
@@ -84,7 +84,7 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: mortgage-config
+            name: leumi-ltv-service-config
 ---
 # Source: mortgage/templates/tests/test-connection.yaml
 apiVersion: v1
