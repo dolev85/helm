@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "{{ .Values.image.repository | default '637423493523.dkr.ecr.eu-west-1.amazonaws.com/default-service' }}"
-  tag: "{{ .Values.image.tag | default 'latest' }}"  # Will be replaced dynamically by the image updater
+  repository: "{{ .Values.image.repository }}"
+  tag: "{{ .Values.image.tag }}"  # Will be replaced dynamically by the image updater
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -39,8 +39,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: "{{ .Values.service.name | default 'default-service' }}"
-  contextPath: "{{ .Values.service.contextPath | default '/default-service' }}"
+  name: "{{ .Values.service.name }}"
+  contextPath: "{{ .Values.service.contextPath }}"
   type: ClusterIP
   port: 8080
   role: "dev"
