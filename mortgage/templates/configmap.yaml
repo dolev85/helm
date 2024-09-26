@@ -6,6 +6,10 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 data:
   SERVER_SERVLET_CONTEXT_PATH: {{ .Values.service.contextPath | quote }}
+  {{- if .Values.configVars }}
   {{- range $key, $value := .Values.configVars }}
-  {{ $key }}: {{ $value | quote }}
+  {{ $key | quote }}: {{ $value | quote }}
+  {{- end }}
+  {{- else }}
+  # No config variables were provided
   {{- end }}

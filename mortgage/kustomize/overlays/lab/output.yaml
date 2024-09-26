@@ -1,0 +1,108 @@
+---
+# Source: mortgage/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: leumi-ltv-service-sa
+  labels:
+    helm.sh/chart: mortgage-0.1.0
+    app.kubernetes.io/name: mortgage
+    app.kubernetes.io/instance: mortgage
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+automountServiceAccountToken: true
+---
+# Source: mortgage/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: leumi-ltv-service-config
+  labels:
+    app.kubernetes.io/managed-by: Helm
+data:
+  SERVER_SERVLET_CONTEXT_PATH: "/leumi-ltv-service"
+  # No config variables were provided
+---
+# Source: mortgage/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: leumi-ltv-service-service
+  labels:
+    app: mortgage
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: leumi-ltv-service
+    role: dev
+---
+# Source: mortgage/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leumi-ltv-service-deployment
+  labels:
+    app: leumi-ltv-service 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leumi-ltv-service  
+      role: dev
+  template:
+    metadata:
+      labels:
+        app: leumi-ltv-service  
+        role: dev
+    spec:
+      containers:
+        - name: leumi-ltv-service  
+          image: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-ltv-service:1.7.0_lab"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: mortgage-config
+          livenessProbe:
+            httpGet:
+              path: /leumi-ltv-service/actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /leumi-ltv-service/actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+      volumes:
+        - name: config-volume
+          configMap:
+            name: mortgage-config
+---
+# Source: mortgage/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "mortgage-test-connection"
+  labels:
+    helm.sh/chart: mortgage-0.1.0
+    app.kubernetes.io/name: mortgage
+    app.kubernetes.io/instance: mortgage
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['mortgage:8080']
+  restartPolicy: Never

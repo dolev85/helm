@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - output.yaml  # It is now in the same directory
+
+# patchesStrategicMerge:
+#   - patch.yaml  # Any patches for lab can go here
