@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: ""
-  tag: ""
+  repository: "{{ .Values.image.repository }}"
+  tag: "{{ .Values.image.tag | default 'latest' }}"
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -39,8 +39,10 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: "default-service"
-  contextPath: "/default-service"
+  # These values will be dynamically set by Argo CD Image Updater
+  name: "{{ .Values.service.name }}"
+  contextPath: "{{ .Values.service.contextPath }}"
+  namespace: "{{ .Values.service.namespace }}"
   type: ClusterIP
   port: 8080
   role: "dev"
