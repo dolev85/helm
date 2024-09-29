@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-ltv-service"
-  tag: "latest"
+  repository: "{{ .Values.image.repository }}"
+  tag: "{{ .Values.image.tag | default 'latest' }}"
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -40,11 +40,11 @@ securityContext: {}
 
 service:
   # These values will be dynamically set by Argo CD Image Updater
-  name: "leumi-ltv-service"
+  name: "{{ .Values.service.name }}"
   type: ClusterIP
   port: 8080
   role: "dev"
-  contextPath: "/leumi-ltv-service"
+  contextPath: "{{ .Values.service.contextPath }}"
 
 ingress:
   enabled: false
