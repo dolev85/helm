@@ -5,9 +5,9 @@
 replicaCount: 1
 
 image:
-  repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-ltv-service"
+  repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/{{ .Values.nameOverride | default .Chart.Name }}"
   tag: "latest"
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,12 +39,10 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  # These values will be dynamically set by Argo CD Image Updater
-  name: "leumi-ltv-service"
+  name: "default-service-name"
   type: ClusterIP
   port: 8080
   role: "dev"
-  contextPath: "/leumi-ltv-service"
 
 ingress:
   enabled: false
@@ -78,14 +76,14 @@ livenessProbe:
   httpGet:
     path: /actuator/health
     port: 8080
-  initialDelaySeconds: 30
+  initialDelaySeconds: 600
   periodSeconds: 10
 
 readinessProbe:
   httpGet:
     path: /actuator/health
     port: 8080
-  initialDelaySeconds: 30
+  initialDelaySeconds: 600
   periodSeconds: 10
 
 autoscaling:
