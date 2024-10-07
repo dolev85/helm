@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "{{ .Values.image.repository }}"
-  tag: "{{ .Values.image.tag }}"  # Will be replaced dynamically by the image updater
+  repository: "default-service-name"
+  tag: ""  # Will be replaced dynamically by the image updater
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -39,8 +39,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: "{{ .Values.service.name }}"
-  contextPath: "{{ .Values.service.contextPath }}"
+  name: ""
+  contextPath: ""
   type: ClusterIP
   port: 8080
   role: "dev"
