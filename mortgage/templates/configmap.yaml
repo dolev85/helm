@@ -1,15 +1,17 @@
+{{- range .Values.services }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "{{ .Values.service.name }}-config"
+  name: "{{ .name }}-config"
   labels:
     app.kubernetes.io/managed-by: Helm
 data:
-  SERVER_SERVLET_CONTEXT_PATH: "{{ .Values.service.contextPath }}"
-  {{- if .Values.configVars }}
-  {{- range $key, $value := .Values.configVars }}
+  SERVER_SERVLET_CONTEXT_PATH: "{{ .service.contextPath }}"
+  {{- if $.Values.configVars }}
+  {{- range $key, $value := $.Values.configVars }}
   "{{ $key }}": "{{ $value }}"
   {{- end }}
   {{- else }}
   # No config variables were provided
   {{- end }}
+{{- end }}
