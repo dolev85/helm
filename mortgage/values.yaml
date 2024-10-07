@@ -40,7 +40,7 @@ securityContext: {}
 
 service:
   name: "{{ .Values.image.repository }}"
-  contextPath: "{{ /.Values.image.repository }}"
+  contextPath: "{{ .Values.image.repository }}"
   type: ClusterIP
   port: 8080
   role: "dev"
