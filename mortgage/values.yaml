@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "default-repository"  # Replace this with a valid default or leave it empty if it's dynamically injected
-  tag: "latest"  # Replace this or leave it empty if dynamically injected
+  repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-ltv-service"
+  tag: "latest"
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -39,11 +39,12 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: "{{ .Values.image.repository }}"
-  contextPath: "{{ .Values.image.repository }}"
+  # These values will be dynamically set by Argo CD Image Updater
+  name: "leumi-ltv-service"
   type: ClusterIP
   port: 8080
   role: "dev"
+  contextPath: "/leumi-ltv-service"
 
 ingress:
   enabled: false
