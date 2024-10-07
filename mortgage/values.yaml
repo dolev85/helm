@@ -5,7 +5,7 @@
 replicaCount: 1
 
 services:
-  leumi-ltv-service:
+  - name: "leumi-ltv-service"
     image:
       repository: "{{ .Values.services.leumi-ltv-service.image.repository }}"
       tag: "{{ .Values.services.leumi-ltv-service.image.tag }}"
@@ -16,7 +16,7 @@ services:
       port: 8080
       role: "dev"
       contextPath: "/leumi-ltv-service"
-  leumi-pti-service:
+  - name: "leumi-pti-service"
     image:
       repository: "{{ .Values.services.leumi-pti-service.image.repository }}"
       tag: "{{ .Values.services.leumi-pti-service.image.tag }}"
@@ -27,7 +27,7 @@ services:
       port: 8080
       role: "dev"
       contextPath: "/leumi-pti-service"
-  
+
 
 imagePullSecrets: []
 nameOverride: ""
