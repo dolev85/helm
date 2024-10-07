@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "default-service-name"
-  tag: ""  # Will be replaced dynamically by the image updater
+  repository: "leumi-ltv-service"
+  tag: "latest"  # Will be replaced dynamically by the image updater
   pullPolicy: Always
 
 imagePullSecrets: []
