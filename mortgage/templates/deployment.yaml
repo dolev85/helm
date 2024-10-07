@@ -27,13 +27,13 @@ spec:
                 name: {{ .Values.service.name }}-config
           livenessProbe:
             httpGet:
-              path: {{ .Values.service.contextPath }}/actuator/health
+              path: /actuator/health
               port: {{ .Values.service.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: {{ .Values.service.contextPath }}/actuator/health
+              path: /actuator/health
               port: {{ .Values.service.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
