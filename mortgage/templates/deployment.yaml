@@ -24,7 +24,7 @@ spec:
             - containerPort: {{ .Values.service.port }}
           envFrom:
             - configMapRef:
-                name: {{ .Release.Name }}-config
+                name: {{ .Values.service.name }}-config
           livenessProbe:
             httpGet:
               path: {{ .Values.service.contextPath }}/actuator/health
