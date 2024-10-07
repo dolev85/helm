@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "{{ .Values.image.repository }}"
-  tag: "{{ .Values.image.tag }}"  # Will be replaced dynamically by the image updater
+  repository: "default-repository"  # Replace this with a valid default or leave it empty if it's dynamically injected
+  tag: "latest"  # Replace this or leave it empty if dynamically injected
   pullPolicy: Always
 
 imagePullSecrets: []

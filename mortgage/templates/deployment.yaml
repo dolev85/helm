@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.service.name }}-deployment
+  name: {{ .Values.service.name | default "default-service" }}-deployment
   labels:
     app: {{ .Values.service.name }} 
 spec:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: {{ .Values.service.name }}  
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository | default "default-repository" }}:{{ .Values.image.tag | default "latest" }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
