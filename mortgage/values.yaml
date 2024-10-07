@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "leumi-ltv-service"
-  tag: "latest"  # Will be replaced dynamically by the image updater
+  repository: "{{ .Values.image.repository }}"
+  tag: "{{ .Values.image.tag }}"  # Will be replaced dynamically by the image updater
   pullPolicy: Always
 
 imagePullSecrets: []
