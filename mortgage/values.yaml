@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/{{ .Values.nameOverride | default .Chart.Name }}"
-  tag: "latest"  # Will be replaced dynamically by the image updater
+  repository: "{{ .Values.image.repository }}"
+  tag: "{{ .Values.image.tag }}"  # Will be replaced dynamically by the image updater
   pullPolicy: Always
 
 imagePullSecrets: []
@@ -39,11 +39,11 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: "default-service-name"
+  name: "{{ .Values.image.repository }}"
+  contextPath: "{{ /.Values.image.repository }}"
   type: ClusterIP
   port: 8080
   role: "dev"
-  contextPath: "/default"
 
 ingress:
   enabled: false
