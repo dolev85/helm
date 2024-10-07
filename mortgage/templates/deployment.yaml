@@ -1,43 +1,38 @@
+{{- range .Values.services }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.service.name | default "default-service" }}-deployment
+  name: {{ .name }}-deployment
   labels:
-    app: {{ .Values.service.name }} 
+    app: {{ .name }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ $.Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.service.name }}  
-      role: {{ .Values.service.role }}
+      app: {{ .name }}
+      role: {{ .service.role }}
   template:
     metadata:
       labels:
-        app: {{ .Values.service.name }}  
-        role: {{ .Values.service.role }}
+        app: {{ .name }}
+        role: {{ .service.role }}
     spec:
       containers:
-        - name: {{ .Values.service.name }}  
-          image: "{{ .Values.image.repository | default "default-repository" }}:{{ .Values.image.tag | default "latest" }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: {{ .name }}
+          image: "{{ .image.repository }}:{{ .image.tag }}"
+          imagePullPolicy: {{ .image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.service.port }}
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.service.name }}-config
+            - containerPort: {{ .service.port }}
           livenessProbe:
             httpGet:
-              path: {{ .Values.service.contextPath }}/actuator/health
-              port: {{ .Values.service.port }}
+              path: {{ .service.contextPath }}/actuator/health
+              port: {{ .service.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: {{ .Values.service.contextPath }}/actuator/health
-              port: {{ .Values.service.port }}
+              path: {{ .service.contextPath }}/actuator/health
+              port: {{ .service.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
-      volumes:
-        - name: config-volume
-          configMap:
-            name: {{ .Values.service.name }}-config
+{{- end }}
