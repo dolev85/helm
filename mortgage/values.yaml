@@ -5,9 +5,9 @@
 replicaCount: 1
 
 image:
-  repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/{{ .Values.nameOverride | default .Chart.Name }}"
-  tag: "latest"
-  pullPolicy: IfNotPresent
+  repository: "{{ .Values.image.repository }}"
+  tag: "{{ .Values.image.tag }}"  # Will be replaced dynamically by the image updater
+  pullPolicy: Always
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,7 +39,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: "default-service-name"
+  name: "{{ .Values.service.name }}"
+  contextPath: "{{ .Values.service.contextPath }}"
   type: ClusterIP
   port: 8080
   role: "dev"
@@ -76,14 +77,14 @@ livenessProbe:
   httpGet:
     path: /actuator/health
     port: 8080
-  initialDelaySeconds: 600
+  initialDelaySeconds: 30
   periodSeconds: 10
 
 readinessProbe:
   httpGet:
     path: /actuator/health
     port: 8080
-  initialDelaySeconds: 600
+  initialDelaySeconds: 30
   periodSeconds: 10
 
 autoscaling:
