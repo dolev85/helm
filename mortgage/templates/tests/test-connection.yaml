@@ -1,15 +1,15 @@
+{{- range .Values.services }}
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "mortgage.fullname" . }}-test-connection"
+  name: "{{ .name }}-test-connection"
   labels:
-    {{- include "mortgage.labels" . | nindent 4 }}
-  annotations:
-    "helm.sh/hook": test
+    app.kubernetes.io/managed-by: Helm
 spec:
   containers:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "mortgage.fullname" . }}:{{ .Values.service.port }}']
+      args: ["{{ .service.name }}:{{ .service.port }}"]
   restartPolicy: Never
+{{- end }}
