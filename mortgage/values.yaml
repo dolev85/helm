@@ -39,8 +39,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: ""
-  contextPath: ""
+  name: "default-service-name"
+  contextPath: "/default"
   type: ClusterIP
   port: 8080
   role: "dev"
