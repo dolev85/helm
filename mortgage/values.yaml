@@ -39,7 +39,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  name: "default-service-name"
+  name: "leumi-ltv-service"
   contextPath: "/default"
   type: ClusterIP
   port: 8080
