@@ -7,8 +7,8 @@ replicaCount: 1
 services:
   - name: "leumi-ltv-service"
     image:
-      repository: "{{ .Values.services.leumi-ltv-service.image.repository }}"
-      tag: "{{ .Values.services.leumi-ltv-service.image.tag }}"
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-ltv-service"
+      tag: "latest"  # Will be dynamically updated by Argo CD Image Updater
       pullPolicy: Always
     service:
       name: "leumi-ltv-service"
@@ -18,8 +18,8 @@ services:
       contextPath: "/leumi-ltv-service"
   - name: "leumi-pti-service"
     image:
-      repository: "{{ .Values.services.leumi-pti-service.image.repository }}"
-      tag: "{{ .Values.services.leumi-pti-service.image.tag }}"
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-pti-service"
+      tag: "latest"  # Will be dynamically updated by Argo CD Image Updater
       pullPolicy: Always
     service:
       name: "leumi-pti-service"
