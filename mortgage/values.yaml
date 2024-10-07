@@ -4,7 +4,7 @@ services:
   - name: "leumi-ltv-service"
     image:
       repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-ltv-service"
-      tag: "latest"  # Will be dynamically updated by Argo CD Image Updater
+      tag: "latest"
       pullPolicy: Always
     service:
       name: "leumi-ltv-service"
@@ -12,10 +12,11 @@ services:
       port: 8080
       role: "dev"
       contextPath: "/leumi-ltv-service"
+  
   - name: "leumi-pti-service"
     image:
       repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-pti-service"
-      tag: "latest"  # Will be dynamically updated by Argo CD Image Updater
+      tag: "latest"
       pullPolicy: Always
     service:
       name: "leumi-pti-service"
@@ -23,6 +24,212 @@ services:
       port: 8080
       role: "dev"
       contextPath: "/leumi-pti-service"
+
+  - name: "insurance-service-backend"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/insurance-service-backend"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "insurance-service-backend"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/insurance-service-backend"
+
+  - name: "ltv-service-backend"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/ltv-service-backend"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "ltv-service-backend"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/ltv-service-backend"
+
+  - name: "loan-service-backend"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/loan-service-backend"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "loan-service-backend"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/loan-service-backend"
+
+  - name: "leumi-product-catalog-service"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-product-catalog-service"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "leumi-product-catalog-service"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/leumi-product-catalog-service"
+
+  - name: "fees-service-backend"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/fees-service-backend"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "fees-service-backend"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/fees-service-backend"
+
+  - name: "leumi-fees-service"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-fees-service"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "leumi-fees-service"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/leumi-fees-service"
+
+  - name: "leumi-product-catalog-engine-service"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-product-catalog-engine-service"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "leumi-product-catalog-engine-service"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/leumi-product-catalog-engine-service"
+
+  - name: "product-catalog-engine-service-backend"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/product-catalog-engine-service-backend"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "product-catalog-engine-service-backend"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/product-catalog-engine-service-backend"
+
+  - name: "contractors-service-backend"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/contractors-service-backend"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "contractors-service-backend"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/contractors-service-backend"
+
+  - name: "leumi-contractors-service"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-contractors-service"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "leumi-contractors-service"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/leumi-contractors-service"
+
+  - name: "leumi-insurance-service"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-insurance-service"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "leumi-insurance-service"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/leumi-insurance-service"
+
+  - name: "leumi-addresses-service"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-addresses-service"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "leumi-addresses-service"
+      type: ClusterIP
+      port: 8080
+      role: "prod"
+      contextPath: "/leumi-addresses-service"
+
+  - name: "activity-trail-service-backend"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/activity-trail-service-backend"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "activity-trail-service-backend"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/activity-trail-service-backend"
+
+  - name: "leumi-pricing-service"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-pricing-service"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "leumi-pricing-service"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/leumi-pricing-service"
+      
+  - name: "document-kit-service-backend"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/document-kit-service-backend"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "document-kit-service-backend"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/document-kit-service-backend"
+      
+  - name: "leumi-document-kit-service"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/leumi-document-kit-service"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "leumi-document-kit-service"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/leumi-document-kit-service"
+      
+  - name: "activity-trail-service-backend"
+    image:
+      repository: "637423493523.dkr.ecr.eu-west-1.amazonaws.com/activity-trail-service-backend"
+      tag: "latest"
+      pullPolicy: Always
+    service:
+      name: "activity-trail-service-backend"
+      type: ClusterIP
+      port: 8080
+      role: "dev"
+      contextPath: "/activity-trail-service-backend"
+
+# Add more services following the same format...
 
 imagePullSecrets: []
 nameOverride: ""
